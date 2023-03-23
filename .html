@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Samochód</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="400"></canvas>
+	<script>
+        
+    
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+
+var carX = -200;
+var carSpeed = 5;
+var carVisible = true;
+
+
+function animate() {
+	
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+	if (carVisible) {
+		
+		ctx.beginPath();
+		ctx.arc(100 + carX, 300, 50, 0, Math.PI*2);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(500 + carX, 300, 50, 0, Math.PI*2);
+		ctx.stroke();
+
+		
+		ctx.fillStyle = "gray";
+		ctx.fillRect(100 + carX, 200, 400, 100);
+
+	
+		ctx.fillStyle = "lightblue";
+		ctx.beginPath();
+		ctx.moveTo(100 + carX, 200);
+		ctx.lineTo(300 + carX, 200);
+		ctx.lineTo(200 + carX, 250);
+		ctx.closePath();
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(500 + carX, 200);
+		ctx.lineTo(300 + carX, 200);
+		ctx.lineTo(400 + carX, 250);
+		ctx.closePath();
+		ctx.fill();
+	}
+
+	
+	carX += carSpeed;
+
+
+	if (carX > canvas.width && carSpeed > 0) {
+		carX = -200;
+	} else if (carX < -200 && carSpeed < 0) {
+		carX = canvas.width;
+	}
+
+
+	requestAnimationFrame(animate);
+}
+
+
+animate();
+
+        </script>
+</body>
+</html>
